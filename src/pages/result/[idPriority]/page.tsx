@@ -71,7 +71,7 @@ export default function ResultDetailPage() {
           <Carousel opts={{ dragFree: true }}>
             <CarouselContent>
               {jobDetail.youtubeListDto.getYoutubeList.map((youtube) => (
-                <CarouselItem className="flex-none">
+                <CarouselItem key={`youtube-${youtube.youtubeId}`} className="flex-none">
                   <button
                     className="w-[180px] space-y-2 overflow-hidden"
                     onClick={() => onOpenUrl(youtube.URL)}
@@ -99,7 +99,7 @@ export default function ResultDetailPage() {
           <Carousel opts={{ dragFree: true }}>
             <CarouselContent>
               {jobDetail.bootcampListDTO.getBootcampList.map((bootcamp) => (
-                <CarouselItem className="flex-none">
+                <CarouselItem key={`bootcamp-${bootcamp.bootcampId}`} className="flex-none">
                   <button
                     className="w-[180px] space-y-2 overflow-hidden"
                     onClick={() => onOpenUrl(bootcamp.URL)}
