@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
+import { TimeoutModal } from "./timeout-modal";
 import {
   AnswerCard,
   AnswerCardContent,
@@ -47,11 +48,12 @@ const ANSWER_STYLES = [
 
 export default function SecondStep() {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, "A" | "B">>({});
+  const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
 
   const { remainingTime, progressPercentage } = useTimer({
     initialTime: TOTAL_TIME,
     onTimeEnd: () => {
-      // TODO: 시간 종료 시 처리 로직 추가
+      setIsTimeoutModalOpen(true);
     },
   });
 
@@ -143,6 +145,7 @@ export default function SecondStep() {
           })}
         </div>
       </div>
+      <TimeoutModal isOpen={isTimeoutModalOpen} />
     </section>
   );
 }
