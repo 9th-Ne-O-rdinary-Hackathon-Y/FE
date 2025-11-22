@@ -15,7 +15,7 @@ export const api = ky.create({
       },
     ],
     afterResponse: [
-      async (request, options, response) => {
+      async (_request, _options, response) => {
         // 응답 처리 로직 (예: 토큰 갱신)
 
         return response;
