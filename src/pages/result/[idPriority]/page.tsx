@@ -15,7 +15,6 @@ const BOOTCAMP_IMAGE_BASE_URL = import.meta.env.VITE_BOOTCAMP_IMAGE_BASE_URL;
 export default function ResultDetailPage() {
   const navigate = useNavigate();
   const { idPriority } = useParams();
-  const setGameResult = useGameResultStore((state) => state.setGameResult);
 
   const [id, priority] = idPriority?.split(",") ?? [];
 
@@ -23,7 +22,6 @@ export default function ResultDetailPage() {
   const { data: jobDetail, isLoading, isError } = useGetJobDetail(id);
 
   if (!id || isError) {
-    setGameResult(null);
     return <Navigate to="/" replace />;
   }
 

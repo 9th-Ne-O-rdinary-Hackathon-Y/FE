@@ -1,9 +1,17 @@
+import { useEffect } from "react";
+
 import OnboardingIcon from "@/assets/onboarding_icon.svg?react";
 import { Button } from "@/components/ui/button";
+import { useGameResultStore } from "@/lib/zustand/game-result-store";
 
 import { Link } from "react-router-dom";
 
 export default function RootPage() {
+  const setGameResult = useGameResultStore((state) => state.setGameResult);
+
+  useEffect(() => {
+    setGameResult(null);
+  }, []);
   return (
     <main className="flex h-screen flex-col px-5 py-14">
       <section className="flex flex-1 flex-col items-center justify-center space-y-[68px]">

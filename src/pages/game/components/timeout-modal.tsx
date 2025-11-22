@@ -11,12 +11,10 @@ interface TimeoutModalProps {
 
 export function TimeoutModal({ isOpen }: TimeoutModalProps) {
   const navigate = useNavigate();
-  const setGameResult = useGameResultStore((state) => state.setGameResult);
 
   if (!isOpen) return null;
 
   const handleGoHome = () => {
-    setGameResult(null);
     navigate("/");
   };
 

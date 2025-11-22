@@ -8,15 +8,13 @@ import AnalyzeResult from "./components/analyze-result";
 export default function ResultPage() {
   const navigate = useNavigate();
 
-  const { gameResult, setGameResult } = useGameResultStore();
+  const gameResult = useGameResultStore((state) => state.gameResult);
 
   const onRestart = () => {
-    setGameResult(null);
     navigate("/");
   };
 
   if (!gameResult) {
-    setGameResult(null);
     return <Navigate to="/" replace />;
   }
 
