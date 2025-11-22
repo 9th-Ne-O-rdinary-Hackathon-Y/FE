@@ -24,6 +24,8 @@ export default defineConfig([
       "simple-import-sort": simpleImportSort,
     },
     rules: {
+      "@typescript-eslint/no-unused-vars": "warn",
+      "no-unused-vars": "warn",
       "react-refresh/only-export-components": "off",
       "simple-import-sort/imports": [
         "error",
