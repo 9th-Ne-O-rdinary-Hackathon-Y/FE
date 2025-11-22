@@ -4,6 +4,7 @@ const API_TIMEOUT = 10000; // 10초
 
 export const api = ky.create({
   timeout: API_TIMEOUT,
+  prefixUrl: "/api/api",
   retry: 0,
   hooks: {
     beforeRequest: [
