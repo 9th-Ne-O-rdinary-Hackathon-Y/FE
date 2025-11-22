@@ -1,5 +1,6 @@
 import { api } from "@/lib/ky";
 import type { GameForm } from "@/pages/game/schema/game";
+import type { BaseResponse } from "@/types/base";
 import { useMutation } from "@tanstack/react-query";
 
 interface CreateJobResponse {
@@ -23,7 +24,7 @@ interface CreateJobResponse {
 
 type GameAnswer = "A" | "B";
 
-const createJob = async (request: GameForm): Promise<CreateJobResponse> => {
+const createJob = async (request: GameForm): Promise<BaseResponse<CreateJobResponse>> => {
   return api.post("job", { json: request }).json();
 };
 

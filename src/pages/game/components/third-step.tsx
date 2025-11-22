@@ -4,8 +4,12 @@ import CatIcon from "@/assets/third_game_cat_icon.svg?react";
 import ThirdStepIcon from "@/assets/third_game_icon.svg?react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useGameResultStore } from "@/lib/zustand/game-result-store";
+import { useCreateJob } from "@/pages/result/hooks/use-create-job";
+import { errorToast } from "@/utils/toast";
 
 import type { UseFormReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import type { GameForm } from "../schema/game";
 
@@ -29,15 +33,30 @@ const ANSWER_STYLES = [
 ];
 
 export default function ThirdStep({ form }: ThirdStepProps) {
-  // TODO: form 연결하고 해당 데이터들로 API 요청하기
+  const navigate = useNavigate();
+  const setGameResult = useGameResultStore((state) => state.setGameResult);
+
+  const { mutateAsync: createJob } = useCreateJob();
+
   const [selectedAnswer, setSelectedAnswer] = useState(0);
 
-  const onSelectAnswer = (style: number) => {
-    setSelectedAnswer(style);
+  const onSubmitAnswers = (value: number) => {
+    setSelectedAnswer(value);
+    form.handleSubmit(async (data) => {
+      try {
+        const body = { ...data, game_3: { select: value } };
+        const response = await createJob(body);
+        setGameResult(response.data);
+        navigate("/result");
+      } catch (error) {
+        errorToast("잠시 후 다시 시도해주세요.");
+        console.error(error);
+      }
+    })();
   };
 
   return (
-    <section className="flex h-full flex-col justify-between">
+    <main className="flex h-screen flex-col justify-between px-5 pt-3 pb-6">
       <div className="flex gap-2">
         <h1 className="text-2xl font-bold">
           업무요청이 마구 들어온다!
@@ -50,6 +69,7 @@ export default function ThirdStep({ form }: ThirdStepProps) {
         <CatIcon className="mb-2.5 self-center" />
         {ANSWER_STYLES.map((answer) => (
           <Button
+            disabled={form.formState.isSubmitting}
             className={cn(
               "rounded-full border py-4",
               selectedAnswer === answer.value
@@ -57,12 +77,12 @@ export default function ThirdStep({ form }: ThirdStepProps) {
                 : "bg-orange-03 border-orange-06"
             )}
             key={answer.value}
-            onClick={() => onSelectAnswer(answer.value)}
+            onClick={() => onSubmitAnswers(answer.value)}
           >
             {answer.label}
           </Button>
         ))}
       </div>
-    </section>
+    </main>
   );
 }

@@ -42,7 +42,7 @@ export default function GamePage() {
   });
 
   const onResetGame = () => {
-    form.reset(DEFAULT_VALUES);
+    form.reset();
     navigate("/");
   };
 
