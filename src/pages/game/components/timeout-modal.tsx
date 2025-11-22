@@ -1,5 +1,4 @@
 import AlertIcon from "@/assets/alert_icon.svg?react";
-import { useGameResultStore } from "@/lib/zustand/game-result-store";
 
 import { useNavigate } from "react-router-dom";
 

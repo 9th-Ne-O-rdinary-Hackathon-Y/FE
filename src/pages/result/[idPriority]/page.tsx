@@ -3,7 +3,6 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import Chip from "@/components/ui/chip";
 import { WebviewEvent } from "@/constants/webview";
 import { useWebView } from "@/hooks/use-webview";
-import { useGameResultStore } from "@/lib/zustand/game-result-store";
 
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
@@ -37,6 +36,8 @@ export default function ResultDetailPage() {
     );
   }
 
+  const allContents = jobDetail.getJobDto.content.split("\n").map((content) => content.trim());
+
   return (
     <main className="flex flex-col px-5 py-[calc(var(--spacing-safe-top)+12px)]">
       <button className="mb-4" onClick={() => navigate(-1)}>
@@ -58,7 +59,9 @@ export default function ResultDetailPage() {
         </div>
         <div className="bg-orange-01 text-orange-10 flex flex-col gap-6 rounded-[12px] px-2 py-4 text-[15px]">
           <ul className="ml-4 list-inside list-disc">
-            <li>{jobDetail.getJobDto.content}</li>
+            {allContents.map((content) => (
+              <li key={content}>{content}</li>
+            ))}
           </ul>
           <CatIcon className="self-end" />
         </div>
