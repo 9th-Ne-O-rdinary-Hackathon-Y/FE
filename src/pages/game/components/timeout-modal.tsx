@@ -1,6 +1,6 @@
 import AlertIcon from "@/assets/alert_icon.svg?react";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Button } from "../../../components/ui/button";
 
@@ -9,13 +9,7 @@ interface TimeoutModalProps {
 }
 
 export function TimeoutModal({ isOpen }: TimeoutModalProps) {
-  const navigate = useNavigate();
-
   if (!isOpen) return null;
-
-  const handleGoHome = () => {
-    navigate("/");
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -29,9 +23,10 @@ export function TimeoutModal({ isOpen }: TimeoutModalProps) {
             게임을 재시작해야 해요.
           </p>
         </div>
-
-        <Button variant="default" onClick={handleGoHome} className="w-full">
-          처음으로 돌아가기
+        <Button variant="default" asChild className="flex w-full items-center px-3 py-4">
+          <Link to={`/`}>
+            <div className="flex items-center gap-[5px]">처음으로 돌아가기</div>
+          </Link>
         </Button>
       </div>
     </div>

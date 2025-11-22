@@ -85,7 +85,7 @@ export default function SecondStep({ form }: SecondStepProps) {
 
   return (
     <section className="flex h-full flex-col items-center justify-center gap-6">
-      <div className="flex w-full items-center gap-2">
+      <div className="flex w-[335px] items-center gap-2 pt-3">
         <div className="text-2xl font-bold">내가 일하는 스타일은! </div>
         <SecondStepIcon />
       </div>
@@ -110,7 +110,7 @@ export default function SecondStep({ form }: SecondStepProps) {
       </div>
 
       <div>
-        <div className="flex flex-col items-center justify-center gap-7">
+        <div className="flex w-[335px] flex-col items-center justify-center gap-7">
           {ANSWER_STYLES.map((pair, pairIndex) => {
             const isFirstSelected = selectedAnswers[pairIndex] === "A";
             const isSecondSelected = selectedAnswers[pairIndex] === "B";
