@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Chip from "@/components/ui/chip";
 
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -32,12 +33,9 @@ export default function AnalyzeResult({
           </div>
           <div className="flex gap-1.5">
             {tags.map((tag) => (
-              <p
-                key={`${rank}-${tag}`}
-                className="text-orange-10 bg-orange-03 border-orange-06 rounded-sm border px-1.5 py-2 text-xs font-semibold"
-              >
+              <Chip key={`${rank}-${tag}`} variant="orange">
                 # {tag}
-              </p>
+              </Chip>
             ))}
           </div>
         </div>
