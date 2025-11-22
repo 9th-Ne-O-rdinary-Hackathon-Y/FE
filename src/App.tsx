@@ -1,11 +1,15 @@
+import { lazy } from "react";
+
 import { Route, Routes } from "react-router-dom";
 
-import RootPage from "./pages/root/page";
+const RootPage = lazy(() => import("@/pages/root/page"));
+const GamePage = lazy(() => import("@/pages/game/page"));
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<RootPage />} />
+      <Route index path="/" element={<RootPage />} />
+      <Route path="/game" element={<GamePage />} />
     </Routes>
   );
 }
