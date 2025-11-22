@@ -67,6 +67,7 @@
   --color-gray-08: oklch(0.2 0 0);
 
   /* Orange Scale */
+  --color-orange-00: oklch(0.985 0.01 48.5);
   --color-orange-01: oklch(0.963 0.02 48.5);
   --color-orange-02: oklch(0.926 0.042 48.2);
   --color-orange-03: oklch(0.89 0.063 48);
