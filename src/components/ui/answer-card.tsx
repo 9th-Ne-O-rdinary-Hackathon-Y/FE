@@ -10,8 +10,7 @@ const AnswerCard = ({
   <div
     ref={ref}
     className={cn(
-      "min-w-[143px]",
-      "bg-orange-01 flex flex-col items-center justify-center gap-2 rounded-xl border border-transparent px-4 pt-2.5 pb-4 transition-colors",
+      "bg-orange-01 flex min-h-[108px] w-[160px] flex-col items-center justify-center gap-2 rounded-xl border border-transparent px-4 pt-2.5 pb-4 transition-colors",
       className
     )}
     {...props}

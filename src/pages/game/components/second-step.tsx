@@ -1,13 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import SecondStepIcon from "@/assets/second_game_icon.svg?react";
 import { cn } from "@/lib/utils";
 
+import { TimeoutModal } from "./timeout-modal";
 import {
   AnswerCard,
   AnswerCardContent,
   AnswerCardHeader,
 } from "../../../components/ui/answer-card";
+import { useTimer } from "../hooks/use-timer";
+
 const TOTAL_TIME = 25;
 
 // TODO: API 응답으로 받을 데이터
@@ -46,8 +49,14 @@ const ANSWER_STYLES = [
 
 export default function SecondStep() {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, "A" | "B">>({});
-  const [remainingTime, setRemainingTime] = useState(TOTAL_TIME);
-  const timerRef = useRef<number | null>(null);
+  const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
+
+  const { remainingTime, progressPercentage } = useTimer({
+    initialTime: TOTAL_TIME,
+    onTimeEnd: () => {
+      setIsTimeoutModalOpen(true);
+    },
+  });
 
   const handleSelectAnswer = (pairIndex: number, value: "A" | "B") => {
     setSelectedAnswers((prev) => ({
@@ -55,29 +64,6 @@ export default function SecondStep() {
       [pairIndex]: value,
     }));
   };
-
-  useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setRemainingTime((prev) => {
-        if (prev <= 1) {
-          if (timerRef.current) {
-            clearInterval(timerRef.current);
-            timerRef.current = null;
-          }
-          // TODO: 시간 종료 시 처리 로직 추가
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, []);
 
   const allAnswersSelected = ANSWER_STYLES.every(
     (_, index) => selectedAnswers[index] !== undefined
@@ -89,8 +75,6 @@ export default function SecondStep() {
       // TODO: 다음 단계로 이동하는 로직 추가
     }
   }, [allAnswersSelected, remainingTime, selectedAnswers]);
-
-  const progressPercentage = (remainingTime / TOTAL_TIME) * 100;
 
   return (
     <section className="flex h-full flex-col items-center justify-center gap-6">
@@ -162,6 +146,7 @@ export default function SecondStep() {
           })}
         </div>
       </div>
+      <TimeoutModal isOpen={isTimeoutModalOpen} />
     </section>
   );
 }
