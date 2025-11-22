@@ -75,6 +75,9 @@
   --color-orange-06: oklch(0.735 0.173 45.6);
   --color-orange-07: oklch(0.585 0.174 41.4);
   --color-orange-08: oklch(0.476 0.138 42.2);
+  --color-orange-09: oklch(0.359 0.101 42.7);
+  --color-orange-10: oklch(0.299 0.081 44.5);
+  --color-orange-11: oklch(0.233 0.058 46.4);
 }
 
 :root {
@@ -110,9 +113,9 @@
   /* Chart Colors */
   --chart-1: var(--color-key-01);
   --chart-2: var(--color-orange-05);
-  --chart-3: var(--color-orange-07);
-  --chart-4: var(--color-gray-05);
-  --chart-5: var(--color-gray-07);
+  --chart-3: var(--color-orange-06);
+  --chart-4: var(--color-orange-07);
+  --chart-5: var(--color-gray-05);
   /* Sidebar */
   --sidebar: var(--color-gray-01);
   --sidebar-foreground: var(--color-gray-08);
