@@ -91,6 +91,23 @@
 @layer base {
   * {
     @apply border-border outline-ring/50 font-pretendard;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    img {
+      -webkit-touch-callout: none;
+      -webkit-user-drag: none;
+      pointer-events: auto;
+    }
   }
   body {
     @apply max-w-mobile mx-auto;
