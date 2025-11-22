@@ -1,4 +1,5 @@
 import { api } from "@/lib/ky";
+import type { GameForm } from "@/pages/game/schema/game";
 import { useMutation } from "@tanstack/react-query";
 
 interface CreateJobResponse {
@@ -22,27 +23,7 @@ interface CreateJobResponse {
 
 type GameAnswer = "A" | "B";
 
-interface CreateJobRequest {
-  game_1: {
-    client_x: number;
-    client_y: number;
-    answer_x: number;
-    answer_y: number;
-    ms: number;
-  };
-  game_2: {
-    question_1: GameAnswer;
-    question_2: GameAnswer;
-    question_3: GameAnswer;
-    question_4: GameAnswer;
-    question_5: GameAnswer;
-  };
-  game_3: {
-    select: number;
-  };
-}
-
-const createJob = async (request: CreateJobRequest): Promise<CreateJobResponse> => {
+const createJob = async (request: GameForm): Promise<CreateJobResponse> => {
   return api.post("job", { json: request }).json();
 };
 
@@ -52,4 +33,4 @@ const useCreateJob = () => {
   });
 };
 
-export { useCreateJob, type CreateJobResponse, type CreateJobRequest, type GameAnswer };
+export { useCreateJob, type CreateJobResponse, type GameAnswer };

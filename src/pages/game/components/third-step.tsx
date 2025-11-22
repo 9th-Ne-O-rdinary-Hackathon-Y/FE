@@ -5,28 +5,34 @@ import ThirdStepIcon from "@/assets/third_game_icon.svg?react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import type { UseFormReturn } from "react-hook-form";
+
+import type { GameForm } from "../schema/game";
+
+interface ThirdStepProps {
+  form: UseFormReturn<GameForm>;
+}
+
 const ANSWER_STYLES = [
   {
     label: "A. 회사에서 장기적으로 중요한 요청",
-    value: "A" as const,
+    value: 1,
   },
   {
     label: "B. 고객 이팩트가 큰 요청",
-    value: "B" as const,
+    value: 2,
   },
   {
     label: "C. 내가 빨리, 잘 처리 가능한 요청",
-    value: "C" as const,
+    value: 3,
   },
 ];
 
-type Answer = "A" | "B" | "C";
-
-export default function ThirdStep() {
+export default function ThirdStep({ form }: ThirdStepProps) {
   // TODO: form 연결하고 해당 데이터들로 API 요청하기
-  const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(0);
 
-  const onSelectAnswer = (style: Answer) => {
+  const onSelectAnswer = (style: number) => {
     setSelectedAnswer(style);
   };
 

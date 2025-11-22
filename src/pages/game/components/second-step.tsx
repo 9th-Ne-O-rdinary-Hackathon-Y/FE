@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import SecondStepIcon from "@/assets/second_game_icon.svg?react";
 import { cn } from "@/lib/utils";
 
+import type { UseFormReturn } from "react-hook-form";
+
 import { TimeoutModal } from "./timeout-modal";
 import {
   AnswerCard,
@@ -10,6 +12,11 @@ import {
   AnswerCardHeader,
 } from "../../../components/ui/answer-card";
 import { useTimer } from "../hooks/use-timer";
+import type { GameForm } from "../schema/game";
+
+interface SecondStepProps {
+  form: UseFormReturn<GameForm>;
+}
 
 const TOTAL_TIME = 25;
 
@@ -47,7 +54,7 @@ const ANSWER_STYLES = [
   ],
 ] as const;
 
-export default function SecondStep() {
+export default function SecondStep({ form }: SecondStepProps) {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, "A" | "B">>({});
   const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
 
