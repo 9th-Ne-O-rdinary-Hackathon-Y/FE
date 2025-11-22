@@ -20,7 +20,7 @@ export function TimeoutModal({ isOpen }: TimeoutModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/20" />
-      <div className="bg-orange-01 relative z-10 flex w-[335px] flex-col items-center gap-5 rounded-[22px] px-4 py-7">
+      <div className="bg-orange-01 max-w-mobile relative z-10 mx-5 flex w-full flex-col items-center gap-5 rounded-[22px] px-4 py-7">
         <div className="flex items-center gap-4">
           <AlertIcon />
           <p className="text-center text-sm font-semibold">

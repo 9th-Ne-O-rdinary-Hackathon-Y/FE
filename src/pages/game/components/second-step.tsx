@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 import SecondStepIcon from "@/assets/second_game_icon.svg?react";
 import { cn } from "@/lib/utils";
+import type { GameAnswer } from "@/pages/result/hooks/use-create-job";
 
 import type { UseFormReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import { TimeoutModal } from "./timeout-modal";
 import {
@@ -54,43 +56,43 @@ const ANSWER_STYLES = [
   ],
 ] as const;
 
+const QUESTION_KEYS = ["question1", "question2", "question3", "question4", "question5"] as const;
+
 export default function SecondStep({ form }: SecondStepProps) {
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, "A" | "B">>({});
+  const answers = form.watch("game2");
   const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
 
-  const { remainingTime, progressPercentage } = useTimer({
+  const navigate = useNavigate();
+
+  const { progressPercentage } = useTimer({
     initialTime: TOTAL_TIME,
     onTimeEnd: () => {
       setIsTimeoutModalOpen(true);
     },
   });
 
-  const handleSelectAnswer = (pairIndex: number, value: "A" | "B") => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [pairIndex]: value,
-    }));
+  const handleSelectAnswer = (pairIndex: number, value: GameAnswer) => {
+    form.setValue(`game2.${QUESTION_KEYS[pairIndex]}`, value);
   };
 
   const allAnswersSelected = ANSWER_STYLES.every(
-    (_, index) => selectedAnswers[index] !== undefined
+    (_, index) => answers[QUESTION_KEYS[index]] !== undefined
   );
 
-  // TODO: 모든 답변이 선택되었을 때 또는 시간이 끝났을 때 처리
   useEffect(() => {
-    if (allAnswersSelected || remainingTime === 0) {
-      // TODO: 다음 단계로 이동하는 로직 추가
+    if (allAnswersSelected) {
+      navigate("?step=3");
     }
-  }, [allAnswersSelected, remainingTime, selectedAnswers]);
+  }, [allAnswersSelected]);
 
   return (
-    <section className="flex h-full flex-col items-center justify-center gap-6">
+    <section className="flex h-full flex-col items-center justify-center gap-6 px-5 py-3">
       <div className="flex w-full items-center gap-2">
         <div className="text-2xl font-bold">내가 일하는 스타일은! </div>
         <SecondStepIcon />
       </div>
 
-      <div className="mb-4 flex w-[335px] flex-col items-end justify-center gap-3">
+      <div className="mb-4 flex w-full flex-col items-end justify-center gap-3">
         <div className="relative h-[20px] w-full">
           <div className="bg-gray-03 h-[20px] w-full rounded-full" />
 
@@ -109,14 +111,14 @@ export default function SecondStep({ form }: SecondStepProps) {
         <div className="text-xs font-semibold">25초 안에 응답해주세요.</div>
       </div>
 
-      <div>
+      <div className="w-full">
         <div className="flex flex-col items-center justify-center gap-7">
           {ANSWER_STYLES.map((pair, pairIndex) => {
-            const isFirstSelected = selectedAnswers[pairIndex] === "A";
-            const isSecondSelected = selectedAnswers[pairIndex] === "B";
+            const isFirstSelected = answers[QUESTION_KEYS[pairIndex]] === "A";
+            const isSecondSelected = answers[QUESTION_KEYS[pairIndex]] === "B";
 
             return (
-              <div key={pairIndex} className="flex flex-row items-center justify-center gap-4.5">
+              <div key={pairIndex} className="flex w-full flex-row items-center justify-between">
                 <AnswerCard
                   className={cn(isFirstSelected && "bg-orange-03 border-key-01", "cursor-pointer")}
                   onClick={() => handleSelectAnswer(pairIndex, "A")}
