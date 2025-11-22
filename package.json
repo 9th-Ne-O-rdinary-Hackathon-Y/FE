@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "gen:vercel": "node scripts/generate-vercel-json.js",
+    "build": "pnpm gen:vercel && tsc -b && vite build",
     "lint": "eslint --fix \"**/*.{ts,tsx,md}\"",
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""

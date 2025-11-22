@@ -2,7 +2,7 @@ import ky from "ky";
 
 const API_TIMEOUT = 10000; // 10초
 
-const API_BASE_URL = import.meta.env.DEV ? "/api" : import.meta.env.VITE_API_TARGET || "";
+const API_BASE_URL = "/api";
 
 export const api = ky.create({
   timeout: API_TIMEOUT,
