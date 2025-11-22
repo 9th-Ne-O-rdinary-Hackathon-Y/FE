@@ -8,13 +8,12 @@ interface CreateJobResponse {
   job: {
     priority: number;
     jobName: string;
-    keyword_1: string;
-    keyword_2: string;
-    keyword_3: string;
+    jobId: number;
+    keywords: string[];
     img: string;
     jobSummary: string;
   }[];
-  persolaity: {
+  personality: {
     riskTaking: string;
     pace: number;
     accuracy: number;

@@ -10,21 +10,21 @@ import ThirdStep from "./components/third-step";
 import { type GameForm, gameSchema } from "./schema/game";
 
 const DEFAULT_VALUES = {
-  game_1: {
-    client_x: 0,
-    client_y: 0,
-    answer_x: 0,
-    answer_y: 0,
+  game1: {
+    clientX: 0,
+    clientY: 0,
+    answerX: 0,
+    answerY: 0,
     ms: 0,
   },
-  game_2: {
-    question_1: undefined,
-    question_2: undefined,
-    question_3: undefined,
-    question_4: undefined,
-    question_5: undefined,
+  game2: {
+    question1: undefined,
+    question2: undefined,
+    question3: undefined,
+    question4: undefined,
+    question5: undefined,
   },
-  game_3: {
+  game3: {
     select: 0,
   },
 };

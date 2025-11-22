@@ -1,21 +1,21 @@
 import { z } from "zod";
 
 const gameSchema = z.object({
-  game_1: z.object({
-    client_x: z.number(),
-    client_y: z.number(),
-    answer_x: z.number(),
-    answer_y: z.number(),
+  game1: z.object({
+    clientX: z.number(),
+    clientY: z.number(),
+    answerX: z.number(),
+    answerY: z.number(),
     ms: z.number(),
   }),
-  game_2: z.object({
-    question_1: z.enum(["A", "B"]).optional(),
-    question_2: z.enum(["A", "B"]).optional(),
-    question_3: z.enum(["A", "B"]).optional(),
-    question_4: z.enum(["A", "B"]).optional(),
-    question_5: z.enum(["A", "B"]).optional(),
+  game2: z.object({
+    question1: z.enum(["A", "B"]).optional(),
+    question2: z.enum(["A", "B"]).optional(),
+    question3: z.enum(["A", "B"]).optional(),
+    question4: z.enum(["A", "B"]).optional(),
+    question5: z.enum(["A", "B"]).optional(),
   }),
-  game_3: z.object({
+  game3: z.object({
     select: z.number(),
   }),
 });
