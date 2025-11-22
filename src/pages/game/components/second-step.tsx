@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+import SecondStepIcon from "@/assets/second_game_icon.svg?react";
 import { cn } from "@/lib/utils";
 
 import {
@@ -7,7 +8,6 @@ import {
   AnswerCardContent,
   AnswerCardHeader,
 } from "../../../components/ui/answer-card";
-
 const TOTAL_TIME = 25;
 
 // TODO: API 응답으로 받을 데이터
@@ -96,7 +96,7 @@ export default function SecondStep() {
     <section className="flex h-full flex-col items-center justify-center gap-6">
       <div className="flex w-full items-center gap-2">
         <div className="text-2xl font-bold">내가 일하는 스타일은! </div>
-        <div className="bg-orange-01 size-6" />
+        <SecondStepIcon />
       </div>
 
       <div className="mb-4 flex w-[335px] flex-col items-end justify-center gap-3">

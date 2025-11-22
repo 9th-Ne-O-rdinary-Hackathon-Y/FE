@@ -1,3 +1,4 @@
+import BookIcon from "@/assets/book_icon.svg?react";
 import { Button } from "@/components/ui/button";
 import Chip from "@/components/ui/chip";
 
@@ -53,7 +54,7 @@ export default function AnalyzeResult({
       >
         <Link to={`/result/${id}`}>
           <div className="flex items-center gap-[5px]">
-            <div className="bg-gray-03 size-6 shrink-0" />
+            <BookIcon className="shrink-0" />
             <p className="text-orange-10 text-sm font-semibold">직무 자세히 보기</p>
           </div>
           <ChevronRight className="text-orange-09 size-6" />

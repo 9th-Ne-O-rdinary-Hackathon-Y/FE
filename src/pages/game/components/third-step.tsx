@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import ThirdStepIcon from "@/assets/third_game_icon.svg?react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -36,7 +37,7 @@ export default function ThirdStep() {
           <br />
           먼저 처리할 요청은?
         </h1>
-        <div className="bg-orange-01 mt-1 size-6" />
+        <ThirdStepIcon className="mt-1" />
       </div>
       <div className="flex flex-col gap-3">
         {ANSWER_STYLES.map((answer) => (
