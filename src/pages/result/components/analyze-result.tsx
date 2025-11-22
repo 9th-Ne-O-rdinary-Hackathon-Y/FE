@@ -1,4 +1,5 @@
 import BookIcon from "@/assets/book_icon.svg?react";
+import CatIcon from "@/assets/result_cat_icon.svg?react";
 import { Button } from "@/components/ui/button";
 import Chip from "@/components/ui/chip";
 
@@ -14,14 +15,7 @@ interface AnalyzeResultProps {
   description?: string;
 }
 
-export default function AnalyzeResult({
-  id,
-  rank,
-  title,
-  tags,
-  thumbnail,
-  description,
-}: AnalyzeResultProps) {
+export default function AnalyzeResult({ id, rank, title, tags, description }: AnalyzeResultProps) {
   return (
     <section className="bg-orange-01 space-y-6 rounded-[18px] px-3.5 py-3">
       <div className="space-y-[18px]">
@@ -40,12 +34,10 @@ export default function AnalyzeResult({
             ))}
           </div>
         </div>
-        {thumbnail && (
-          <div className="flex items-center gap-2">
-            <img src={thumbnail} alt={title} className="size-24 shrink-0 object-cover" />
-            <p className="text-orange-10 text-sm">{description}</p>
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          <CatIcon />
+          <p className="text-orange-10 text-sm">{description}</p>
+        </div>
       </div>
       <Button
         variant="secondary"

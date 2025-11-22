@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import CatIcon from "@/assets/third_game_cat_icon.svg?react";
 import ThirdStepIcon from "@/assets/third_game_icon.svg?react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -40,6 +41,7 @@ export default function ThirdStep() {
         <ThirdStepIcon className="mt-1" />
       </div>
       <div className="flex flex-col gap-3">
+        <CatIcon className="mb-2.5 self-center" />
         {ANSWER_STYLES.map((answer) => (
           <Button
             className={cn(

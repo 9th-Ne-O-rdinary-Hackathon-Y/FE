@@ -1,3 +1,4 @@
+import CatIcon from "@/assets/.svg?react";
 import { Button } from "@/components/ui/button";
 
 import { useNavigate } from "react-router-dom";
@@ -10,8 +11,6 @@ const analyzeResults = [
     rank: 1,
     title: "데이터 분석",
     tags: ["SQL 분석", "통계적 사고", "비지니스 인사이트"],
-    thumbnail:
-      "https://i.namu.wiki/i/8mcZn4QTDZNSyG5LCLIltEOwSsrMoAG9TKsurgtD2zMPJWqQCYvZUsL_66BkJy3JmN4lhegQHg_A2iGdD-AWLw.webp",
     description:
       "데이터를 분석해 인사이트를 만들고 문제를 해결하는 직무에요. 의사결정 데이터 기반으로 지원하는 역할이에요.",
   },

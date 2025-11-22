@@ -1,3 +1,4 @@
+import CatIcon from "@/assets/result_cat_icon.svg?react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Chip from "@/components/ui/chip";
 import { WebviewEvent } from "@/constants/webview";
@@ -29,11 +30,7 @@ export default function ResultDetailPage() {
           <ul className="ml-4 list-inside list-disc">
             <li>SQL・Phyton으로 데이터를 수집・정제・분석해요.</li>
           </ul>
-          <img
-            src="https://i.namu.wiki/i/8mcZn4QTDZNSyG5LCLIltEOwSsrMoAG9TKsurgtD2zMPJWqQCYvZUsL_66BkJy3JmN4lhegQHg_A2iGdD-AWLw.webp"
-            alt="데이터 분석"
-            className="size-[90px] shrink-0 self-end object-cover"
-          />
+          <CatIcon className="self-end" />
         </div>
       </div>
       <div className="my-[52px] space-y-4">
