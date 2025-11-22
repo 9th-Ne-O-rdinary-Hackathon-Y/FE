@@ -1,4 +1,5 @@
 import AlertIcon from "@/assets/alert_icon.svg?react";
+import { useGameResultStore } from "@/lib/zustand/game-result-store";
 
 import { useNavigate } from "react-router-dom";
 
@@ -10,10 +11,12 @@ interface TimeoutModalProps {
 
 export function TimeoutModal({ isOpen }: TimeoutModalProps) {
   const navigate = useNavigate();
+  const setGameResult = useGameResultStore((state) => state.setGameResult);
 
   if (!isOpen) return null;
 
   const handleGoHome = () => {
+    setGameResult(null);
     navigate("/");
   };
 

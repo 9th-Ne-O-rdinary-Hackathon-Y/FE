@@ -7,6 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import FirstStep from "./components/first-step";
 import SecondStep from "./components/second-step";
 import ThirdStep from "./components/third-step";
+import { useGetGames } from "./hooks/use-get-games";
 import { type GameForm, gameSchema } from "./schema/game";
 
 const DEFAULT_VALUES = {
@@ -34,6 +35,7 @@ export default function GamePage() {
   const navigate = useNavigate();
 
   const currentStep = searchParams.get("step") || "1";
+  const { data: games = [], isLoading } = useGetGames();
 
   const form = useForm<GameForm>({
     resolver: zodResolver(gameSchema),
@@ -48,9 +50,9 @@ export default function GamePage() {
 
   switch (currentStep) {
     case "1":
-      return <FirstStep form={form} />;
+      return <FirstStep form={form} isLoading={isLoading} />;
     case "2":
-      return <SecondStep form={form} />;
+      return <SecondStep form={form} games={games} />;
     case "3":
       return <ThirdStep form={form} />;
     default:

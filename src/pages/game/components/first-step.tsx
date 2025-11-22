@@ -18,11 +18,12 @@ import {
 
 interface FirstStepProps {
   form: UseFormReturn<GameForm>;
+  isLoading: boolean;
 }
 
 const STAR_SPEED = 20;
 
-export default function FirstStep({ form }: FirstStepProps) {
+export default function FirstStep({ form, isLoading }: FirstStepProps) {
   const center = getCenterPosition();
   const navigate = useNavigate();
 
@@ -120,7 +121,7 @@ export default function FirstStep({ form }: FirstStepProps) {
       <div className="w-full px-5">
         <Button
           onClick={handleStop}
-          disabled={!isMoving}
+          disabled={!isMoving || isLoading}
           variant="default"
           className="text-orange-10 relative z-10 mb-14 w-full font-semibold"
         >

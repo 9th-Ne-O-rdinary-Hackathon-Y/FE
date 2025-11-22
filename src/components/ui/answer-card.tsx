@@ -35,17 +35,19 @@ const AnswerCardContent = ({
   className,
   ref,
   text,
+  icon,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & {
   ref?: React.Ref<HTMLDivElement>;
   text: string;
+  icon: string;
 }) => (
   <div
     ref={ref}
     className={cn("flex flex-row items-center justify-center gap-2", className)}
     {...props}
   >
-    <div className="bg-orange-05 h-[28px] w-[28px]" />
+    <img src={icon} alt={text} width={28} height={28} />
     <div className="text-orange-09 flex min-h-[34px] max-w-[90px] min-w-[90px] items-center justify-center text-center font-medium">
       {text}
     </div>

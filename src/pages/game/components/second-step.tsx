@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import SecondStepIcon from "@/assets/second_game_icon.svg?react";
 import { cn } from "@/lib/utils";
@@ -13,56 +13,37 @@ import {
   AnswerCardContent,
   AnswerCardHeader,
 } from "../../../components/ui/answer-card";
+import type { GetGamesResponse } from "../hooks/use-get-games";
 import { useTimer } from "../hooks/use-timer";
 import type { GameForm } from "../schema/game";
 
 interface SecondStepProps {
   form: UseFormReturn<GameForm>;
+  games: GetGamesResponse["games"];
 }
 
 const TOTAL_TIME = 25;
 
-// TODO: API 응답으로 받을 데이터
-const ANSWER_STYLES = [
-  [
-    {
-      label: "정해진 규정 내에서 일하기",
-      value: "A" as const,
-    },
-    {
-      label: "새로운 시도 계속하기",
-      value: "B" as const,
-    },
-  ],
-  [
-    {
-      label: "오타 없게 꼼꼼하게",
-      value: "A" as const,
-    },
-    {
-      label: "빠르게 넘기기",
-      value: "B" as const,
-    },
-  ],
-  [
-    {
-      label: "직감대로 선택",
-      value: "A" as const,
-    },
-    {
-      label: "근거 찾아보기",
-      value: "B" as const,
-    },
-  ],
-] as const;
-
 const QUESTION_KEYS = ["question1", "question2", "question3", "question4", "question5"] as const;
 
-export default function SecondStep({ form }: SecondStepProps) {
-  const answers = form.watch("game2");
-  const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
-
+export default function SecondStep({ form, games }: SecondStepProps) {
   const navigate = useNavigate();
+  const answers = form.watch("game2");
+  const sortedGames = useMemo(() => {
+    return [...games].sort((a, b) => a.id - b.id);
+  }, [games]);
+
+  const gamePairs = useMemo(() => {
+    const pairs: Array<[(typeof games)[0], (typeof games)[0]]> = [];
+    for (let i = 0; i < sortedGames.length; i += 2) {
+      if (i + 1 < sortedGames.length) {
+        pairs.push([sortedGames[i], sortedGames[i + 1]]);
+      }
+    }
+    return pairs;
+  }, [sortedGames]);
+
+  const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
 
   const { progressPercentage } = useTimer({
     initialTime: TOTAL_TIME,
@@ -75,9 +56,7 @@ export default function SecondStep({ form }: SecondStepProps) {
     form.setValue(`game2.${QUESTION_KEYS[pairIndex]}`, value);
   };
 
-  const allAnswersSelected = ANSWER_STYLES.every(
-    (_, index) => answers[QUESTION_KEYS[index]] !== undefined
-  );
+  const allAnswersSelected = QUESTION_KEYS.every((key) => answers[key] !== undefined);
 
   useEffect(() => {
     if (allAnswersSelected) {
@@ -113,7 +92,7 @@ export default function SecondStep({ form }: SecondStepProps) {
 
       <div className="w-full">
         <div className="flex flex-col items-center justify-center gap-7">
-          {ANSWER_STYLES.map((pair, pairIndex) => {
+          {gamePairs.map((pair, pairIndex) => {
             const isFirstSelected = answers[QUESTION_KEYS[pairIndex]] === "A";
             const isSecondSelected = answers[QUESTION_KEYS[pairIndex]] === "B";
 
@@ -123,12 +102,10 @@ export default function SecondStep({ form }: SecondStepProps) {
                   className={cn(isFirstSelected && "bg-orange-03 border-key-01", "cursor-pointer")}
                   onClick={() => handleSelectAnswer(pairIndex, "A")}
                 >
-                  <AnswerCardHeader
-                    type={pair[0].value}
-                    className={isFirstSelected ? "text-key-01" : ""}
-                  />
+                  <AnswerCardHeader type="A" className={isFirstSelected ? "text-key-01" : ""} />
                   <AnswerCardContent
-                    text={pair[0].label}
+                    icon={pair[0].icon}
+                    text={pair[0].content}
                     className={cn(
                       isFirstSelected && "[&>div:last-child]:text-orange-11 font-semibold"
                     )}
@@ -139,12 +116,10 @@ export default function SecondStep({ form }: SecondStepProps) {
                   className={cn(isSecondSelected && "bg-orange-03 border-key-01", "cursor-pointer")}
                   onClick={() => handleSelectAnswer(pairIndex, "B")}
                 >
-                  <AnswerCardHeader
-                    type={pair[1].value}
-                    className={isSecondSelected ? "text-key-01" : ""}
-                  />
+                  <AnswerCardHeader type="B" className={isSecondSelected ? "text-key-01" : ""} />
                   <AnswerCardContent
-                    text={pair[1].label}
+                    icon={pair[1].icon}
+                    text={pair[1].content}
                     className={cn(
                       isSecondSelected && "[&>div:last-child]:text-orange-11 font-semibold"
                     )}
