@@ -13,7 +13,6 @@ export default function AnalyzeResult({
   jobId,
   jobName,
   keywords,
-  img,
   jobSummary,
 }: CreateJobResponse["job"][number]) {
   return (
@@ -28,9 +27,7 @@ export default function AnalyzeResult({
           </div>
           <div className="flex gap-1.5">
             {keywords.map((keyword) => (
-              <Chip key={`${priority}-${keyword}`} variant="orange">
-                # {keyword}
-              </Chip>
+              <Chip key={`${priority}-${keyword}`}># {keyword}</Chip>
             ))}
           </div>
         </div>
@@ -46,7 +43,7 @@ export default function AnalyzeResult({
         asChild
         className="flex w-full items-center justify-between px-3 py-2"
       >
-        <Link to={`/result/${jobId}`}>
+        <Link to={`/result/${jobId},${priority}`}>
           <div className="flex items-center gap-[5px]">
             <BookIcon className="shrink-0" />
             <p className="text-orange-10 text-sm font-semibold">직무 자세히 보기</p>

@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export default function Chip(
-  props: React.HTMLAttributes<HTMLParagraphElement> & { variant: "orange" }
-) {
+export default function Chip(props: React.HTMLAttributes<HTMLParagraphElement>) {
   const { children, className, ...restProps } = props;
 
   return (

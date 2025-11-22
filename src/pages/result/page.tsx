@@ -16,7 +16,8 @@ export default function ResultPage() {
   };
 
   if (!gameResult) {
-    return <Navigate to="/" />;
+    setGameResult(null);
+    return <Navigate to="/" replace />;
   }
 
   return (
