@@ -13,8 +13,12 @@
 @theme inline {
   --font-pretendard: "Pretendard Variable", sans-serif;
   --spacing-mobile: 600px;
-  --spacing-ios-bottom: env(safe-area-inset-bottom);
-  --spacing-ios-top: env(safe-area-inset-top);
+
+  /* Safe Area Insets - 웹뷰에서 주입됨 */
+  --spacing-safe-top: var(--safe-area-top, 0px);
+  --spacing-safe-bottom: var(--safe-area-bottom, 0px);
+  --spacing-safe-left: var(--safe-area-left, 0px);
+  --spacing-safe-right: var(--safe-area-right, 0px);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -83,6 +87,13 @@
 
 :root {
   --radius: 0.625rem;
+
+  /* Safe Area 초기값 (웹뷰에서 덮어씀) */
+  --safe-area-top: 0px;
+  --safe-area-bottom: 0px;
+  --safe-area-left: 0px;
+  --safe-area-right: 0px;
+
   /* Background & Foreground */
   --background: var(--color-gray-01);
   --foreground: var(--color-gray-08);

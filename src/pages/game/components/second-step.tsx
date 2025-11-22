@@ -86,7 +86,7 @@ export default function SecondStep({ form }: SecondStepProps) {
   }, [allAnswersSelected]);
 
   return (
-    <section className="flex h-full flex-col items-center justify-center gap-6 px-5 py-3">
+    <section className="flex h-full flex-col items-center justify-center gap-6 px-5 pt-[calc(var(--spacing-safe-top)+12px)] pb-[calc(var(--spacing-safe-bottom)+12px)]">
       <div className="flex w-full items-center gap-2">
         <div className="text-2xl font-bold">내가 일하는 스타일은! </div>
         <SecondStepIcon />

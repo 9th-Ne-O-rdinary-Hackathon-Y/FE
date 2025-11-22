@@ -4,6 +4,7 @@ import StarIcon from "@/assets/star_icon.svg?react";
 import { Button } from "@/components/ui/button";
 
 import type { UseFormReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import type { GameForm } from "../schema/game";
 import {
@@ -19,10 +20,11 @@ interface FirstStepProps {
   form: UseFormReturn<GameForm>;
 }
 
-export default function FirstStep({ form }: FirstStepProps) {
-  const STAR_SPEED = 20;
+const STAR_SPEED = 20;
 
+export default function FirstStep({ form }: FirstStepProps) {
   const center = getCenterPosition();
+  const navigate = useNavigate();
 
   const initialState = useState(() => createInitialStarState(STAR_SPEED))[0];
   const [starPosition, setStarPosition] = useState<StarPosition>(initialState.position);
@@ -75,7 +77,8 @@ export default function FirstStep({ form }: FirstStepProps) {
       ms: Date.now() - startTime,
     };
 
-    // TODO: form에 저장 및 다음 스텝 
+    form.setValue("game1", result);
+    navigate("?step=2");
   };
 
   return (
@@ -89,7 +92,7 @@ export default function FirstStep({ form }: FirstStepProps) {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="text-gray-08 z-10 mt-3 ml-5 self-start text-2xl font-bold">
+      <div className="text-gray-08 z-10 mt-[calc(var(--spacing-safe-top)+12px)] ml-5 self-start text-2xl font-bold">
         하늘에 있는 별을 맞춰라!
       </div>
 
@@ -114,12 +117,12 @@ export default function FirstStep({ form }: FirstStepProps) {
         <StarIcon className="fill-current" />
       </div>
 
-      <div className="relative z-10 mb-14">
+      <div className="w-full px-5">
         <Button
           onClick={handleStop}
           disabled={!isMoving}
           variant="default"
-          className="text-orange-10 px-[147px] font-semibold"
+          className="text-orange-10 relative z-10 mb-14 w-full font-semibold"
         >
           STOP
         </Button>

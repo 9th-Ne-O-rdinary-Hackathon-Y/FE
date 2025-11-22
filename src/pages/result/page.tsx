@@ -21,7 +21,7 @@ export default function ResultPage() {
   }
 
   return (
-    <main className="flex flex-col px-5 pt-3 pb-4">
+    <main className="flex flex-col px-5 pt-[calc(var(--spacing-safe-top)+12px)] pb-[calc(var(--spacing-safe-bottom)+16px)]">
       <h1 className="mb-6 text-2xl font-bold">{gameResult.description}</h1>
       <div className="space-y-6">
         {gameResult.job.map((result) => (

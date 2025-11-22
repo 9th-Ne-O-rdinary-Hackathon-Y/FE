@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import CatIcon from "@/assets/third_game_cat_icon.svg?react";
 import ThirdStepIcon from "@/assets/third_game_icon.svg?react";
 import { Button } from "@/components/ui/button";
@@ -38,13 +36,13 @@ export default function ThirdStep({ form }: ThirdStepProps) {
 
   const { mutateAsync: createJob } = useCreateJob();
 
-  const [selectedAnswer, setSelectedAnswer] = useState(0);
+  const selectedAnswer = form.watch("game3.select");
 
   const onSubmitAnswers = (value: number) => {
-    setSelectedAnswer(value);
+    form.setValue("game3.select", value);
     form.handleSubmit(async (data) => {
       try {
-        const body = { ...data, game_3: { select: value } };
+        const body = { ...data, game3: { select: value } };
         const response = await createJob(body);
         setGameResult(response.data);
         navigate("/result");
@@ -56,7 +54,7 @@ export default function ThirdStep({ form }: ThirdStepProps) {
   };
 
   return (
-    <main className="flex h-screen flex-col justify-between px-5 pt-3 pb-6">
+    <main className="flex h-screen flex-col justify-between px-5 pt-[calc(var(--spacing-safe-top)+12px)] pb-[calc(var(--spacing-safe-bottom)+24px)]">
       <div className="flex gap-2">
         <h1 className="text-2xl font-bold">
           업무요청이 마구 들어온다!

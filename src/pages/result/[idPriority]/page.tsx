@@ -10,6 +10,8 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { useGetJobDetail } from "./hooks/use-get-job-detail";
 
+const BOOTCAMP_IMAGE_BASE_URL = import.meta.env.VITE_BOOTCAMP_IMAGE_BASE_URL;
+
 export default function ResultDetailPage() {
   const navigate = useNavigate();
   const { idPriority } = useParams();
@@ -18,9 +20,9 @@ export default function ResultDetailPage() {
   const [id, priority] = idPriority?.split(",") ?? [];
 
   const { postMessage } = useWebView();
-  const { data: jobDetail, isLoading } = useGetJobDetail(id);
+  const { data: jobDetail, isLoading, isError } = useGetJobDetail(id);
 
-  if (!id) {
+  if (!id || isError) {
     setGameResult(null);
     return <Navigate to="/" replace />;
   }
@@ -38,7 +40,7 @@ export default function ResultDetailPage() {
   }
 
   return (
-    <main className="flex flex-col px-5 py-3">
+    <main className="flex flex-col px-5 py-[calc(var(--spacing-safe-top)+12px)]">
       <button className="mb-4" onClick={() => navigate(-1)}>
         <ChevronLeft className="size-6 text-[#787A94]" />
       </button>
@@ -105,7 +107,7 @@ export default function ResultDetailPage() {
                     onClick={() => onOpenUrl(bootcamp.URL)}
                   >
                     <img
-                      src={bootcamp.image}
+                      src={`${BOOTCAMP_IMAGE_BASE_URL}/${bootcamp.image}`}
                       alt={bootcamp.name}
                       className="aspect-video shrink-0 rounded-[8px] object-cover"
                     />
