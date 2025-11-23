@@ -63,7 +63,7 @@ export default function ResultDetailPage() {
               <li key={content}>{content}</li>
             ))}
           </ul>
-          <CatIcon className="self-end" />
+          <CatIcon className="h-24 self-end" />
         </div>
       </div>
       <div className="my-[52px] space-y-4">

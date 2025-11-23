@@ -33,7 +33,7 @@ export default function AnalyzeResult({
         </div>
         {priority === 1 && (
           <div className="flex items-center gap-2">
-            <CatIcon className="min-h-24 shrink-0" />
+            <CatIcon className="h-24 shrink-0" />
             <p className="text-orange-10 text-sm">{jobSummary}</p>
           </div>
         )}
